@@ -12,13 +12,13 @@ function App() {
          <Header/>
          <div className="content">
             <div className="container">
-               <div className="content__top">
+               <div className="contentTop">
                   <Categories/>
                   <Sort />
                </div>
-               <h2 className="content__title">Все пиццы</h2>
-               <div className="content__items">
-                  <PizzaBlock/>
+               <h2 className="contentTitle">Все пиццы</h2>
+               <div className="contentItems">
+                  <PizzaBlock title={'Мексиканская'} price={500}/>
                </div>
             </div>
          </div>
