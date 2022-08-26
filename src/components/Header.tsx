@@ -1,4 +1,5 @@
 import {FC} from "react";
+import logoSvg from '../assets/img/pizza-logo.svg'
 
 type HeaderPropsType = {}
 
@@ -7,7 +8,7 @@ export const Header: FC<HeaderPropsType> = () => {
       <div className="header">
          <div className="container">
             <div className="headerLogo">
-               <img width="38" src="./img/pizza-logo.svg" alt="Pizza logo"/>
+               <img width="38" src={logoSvg} alt="Pizza logo"/>
                <div>
                   <h1>React Pizza</h1>
                   <p>самая вкусная пицца во вселенной</p>

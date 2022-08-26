@@ -1,29 +1,54 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 
-type PizzaBlockPropsType = {
-   title: string
-   price: number
+export type PizzaBlockPropsType = {
+   id: number,
+   imageUrl: string,
+   title: string,
+   types: number[],
+   sizes: number[],
+   price: number,
+   category: number,
+   rating: number
 }
 
-export const PizzaBlock: FC<PizzaBlockPropsType> = ({title, price}) => {
+
+export const PizzaBlock: FC<PizzaBlockPropsType> = (
+   {
+      title, price, types, id,
+      rating, category, sizes, imageUrl
+   }) => {
+   const [activeType, setActiveType] = useState<number>(0)
+   const [activeSizes, setActiveSizes] = useState<number>(0)
+   const typesName = ['тонкое', "традиционное"]
 
    return (
       <div className="pizzaBlock">
          <img
             className="pizzaBlockImage"
-            src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+            src={imageUrl}
             alt="Pizza"
          />
          <h4 className="pizzaBlockTitle">{title}</h4>
          <div className="pizzaBlockSelector">
             <ul>
-               <li className="active">тонкое</li>
-               <li>традиционное</li>
+               {types.map(typeId => (
+                  <li key={typeId}
+                      onClick={() => setActiveType(typeId)}
+                      className={activeType === typeId ? 'active' : ''}
+                  >
+                     {typesName[typeId]}
+                  </li>
+               ))}
             </ul>
             <ul>
-               <li className="active">26 см.</li>
-               <li>30 см.</li>
-               <li>40 см.</li>
+               {sizes.map((size, index) => (
+                  <li key={size}
+                      onClick={() => setActiveSizes(index)}
+                      className={activeSizes === index ? 'active' : ''}
+                  >
+                     {size} см.
+                  </li>
+               ))}
             </ul>
          </div>
          <div className="pizzaBlockBottom">
@@ -42,7 +67,7 @@ export const PizzaBlock: FC<PizzaBlockPropsType> = ({title, price}) => {
                   />
                </svg>
                <span>Добавить</span>
-               <i>2</i>
+               <i>0</i>
             </button>
          </div>
       </div>
