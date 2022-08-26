@@ -1,6 +1,6 @@
 @import '../variables';
 
-.pizza-block {
+.pizzaBlock {
   width: 280px;
   text-align: center;
   margin-bottom: 65px;
@@ -9,18 +9,18 @@
     margin-right: 35px;
   }
 
-  &__image {
+  &Image {
     width: 260px;
   }
 
-  &__title {
+  &Title {
     font-size: 20px;
     font-weight: 900;
     letter-spacing: 1%;
     margin-bottom: 20px;
   }
 
-  &__selector {
+  &Selector {
     display: flex;
     background-color: #f3f3f3;
     border-radius: 10px;
@@ -52,14 +52,14 @@
     }
   }
 
-  &__bottom {
+  &Bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
   }
 
-  &__price {
+  &Price {
     font-weight: bold;
     font-size: 22px;
     line-height: 27px;
