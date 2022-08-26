@@ -1,10 +1,12 @@
-import React from 'react';
+import {FC} from 'react';
 
 type PizzaBlockPropsType = {
    title: string
    price: number
 }
-export const PizzaBlock: React.FC<PizzaBlockPropsType> = ({title, price}) => {
+
+export const PizzaBlock: FC<PizzaBlockPropsType> = ({title, price}) => {
+
    return (
       <div className="pizzaBlock">
          <img
@@ -26,7 +28,7 @@ export const PizzaBlock: React.FC<PizzaBlockPropsType> = ({title, price}) => {
          </div>
          <div className="pizzaBlockBottom">
             <div className="pizzaBlockPrice">от {price} ₽</div>
-            <div className="button buttonOutline buttonAdd">
+            <button className="button buttonOutline buttonAdd">
                <svg
                   width="12"
                   height="12"
@@ -41,7 +43,7 @@ export const PizzaBlock: React.FC<PizzaBlockPropsType> = ({title, price}) => {
                </svg>
                <span>Добавить</span>
                <i>2</i>
-            </div>
+            </button>
          </div>
       </div>
    );

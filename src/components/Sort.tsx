@@ -1,8 +1,8 @@
-import React from "react";
+import {FC} from "react";
 
 type SortPropsType = {}
 
-export const Sort: React.FC<SortPropsType> = () => {
+export const Sort: FC<SortPropsType> = () => {
    return (
       <div className="sort">
          <div className="sortLabel">
