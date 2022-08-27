@@ -1,8 +1,18 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 
 type SortPropsType = {}
 
 export const Sort: FC<SortPropsType> = () => {
+   const [visible, setVisible] = useState<boolean>(false)
+   const [selected, setSelected] = useState<number>(0)
+   const list = ["популярности", "цене", "алфавиту"]
+   const sortName = list[selected]
+
+   const onClickListItem = (index: number) => {
+      setSelected(index)
+      setVisible(false)
+   }
+
    return (
       <div className="sort">
          <div className="sortLabel">
@@ -19,15 +29,18 @@ export const Sort: FC<SortPropsType> = () => {
                />
             </svg>
             <b>Сортировка по:</b>
-            <span>популярности</span>
+            <span onClick={() => setVisible(!visible)}>{sortName}</span>
          </div>
-         <div className="sortPopup">
-            <ul>
-               <li className="active">популярности</li>
-               <li>цене</li>
-               <li>алфавиту</li>
-            </ul>
-         </div>
+         {visible && <div className="sortPopup">
+             <ul>
+                {list.map((name, index) => (
+                   <li key={index}
+                       onClick={() => onClickListItem(index)}
+                       className={selected === index ? 'active' : ''}>{name}</li>
+                ))}
+             </ul>
+         </div>}
+
       </div>
    );
 };

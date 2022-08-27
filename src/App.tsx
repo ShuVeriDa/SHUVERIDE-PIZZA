@@ -30,7 +30,7 @@ function App() {
                <h2 className="contentTitle">Все пиццы</h2>
                <div className="contentItems">
                   {pizzas.pizzas.map((obj: PizzaType, index) => (
-                     <PizzaBlock key={index} {...obj}/>
+                     <PizzaBlock key={obj.id} {...obj}/>
                   ))}
                </div>
             </div>

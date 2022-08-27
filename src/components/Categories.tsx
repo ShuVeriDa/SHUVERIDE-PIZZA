@@ -10,7 +10,7 @@ export const Categories: React.FC<CategoriesPropsType> = () => {
       <div className="categories">
          <ul>
             {categories.map((value, index) => {
-               return <li key={value}
+               return <li key={index}
                           onClick={() => setActiveIndex(index)}
                           className={activeIndex === index ? "active" : ''}
                >
