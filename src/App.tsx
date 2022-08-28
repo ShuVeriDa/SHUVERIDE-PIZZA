@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './scss/app.scss';
 import {Header} from "./components/Header";
-import {Categories} from "./components/Categories";
-import {PizzaBlock} from "./components/PizzaBlock/PizzaBlock";
-import {Sort} from "./components/Sort";
-import {Main} from "./pages/Main";
+import {Home} from "./pages/Home";
 import {Route, Routes} from "react-router-dom";
 import {NotFound} from "./pages/NotFound";
 import {Cart} from "./pages/Cart";
@@ -27,13 +24,11 @@ function App() {
       <div className="wrapper">
          <Header/>
          <div className="content">
-            <div className="container">
                <Routes>
-                  <Route path={'/'} element={<Main />} />
+                  <Route path={'/'} element={<Home />} />
                   <Route path={'/cart'} element={<Cart />} />
                   <Route path={'*'} element={<NotFound />} />
                </Routes>
-            </div>
          </div>
       </div>
    );

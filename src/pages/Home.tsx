@@ -5,7 +5,7 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {PizzaType} from "../App";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 
-export const Main = () => {
+export const Home = () => {
    const [items, setItems] = useState([])
    const [loading, setLoading] = useState<boolean>(true)
    const array = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
@@ -17,9 +17,10 @@ export const Main = () => {
             setItems(arr)
             setLoading(false)
          })
+      window.scroll(0, 0)
    }, [])
    return (
-      <div>
+      <div className='container'>
          <div className="contentTop">
             <Categories/>
             <Sort/>

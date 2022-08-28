@@ -15,7 +15,7 @@ export const Header: FC<HeaderPropsType> = () => {
                   <p>самая вкусная пицца во вселенной</p>
                </div>
             </Link>
-            <div className="header__cart">
+            <div className="headerCart">
                <Link to="/cart" className="button buttonCart">
                   <span>520 ₽</span>
                   <div className="buttonDelimiter"></div>
