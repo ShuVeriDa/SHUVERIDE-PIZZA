@@ -4,6 +4,10 @@ import {Header} from "./components/Header";
 import {Categories} from "./components/Categories";
 import {PizzaBlock} from "./components/PizzaBlock";
 import {Sort} from "./components/Sort";
+import {Main} from "./pages/Main";
+import {Route, Routes} from "react-router-dom";
+import {NotFound} from "./pages/NotFound";
+import {Cart} from "./pages/Cart";
 
 export type PizzaType = {
    id: number,
@@ -17,31 +21,18 @@ export type PizzaType = {
 }
 
 function App() {
-   const [items, setItems] = useState([])
 
-   useEffect(() => {
-      fetch('https://630a32f93249910032824d12.mockapi.io/items')
-         .then((res) => res.json())
-         .then((arr) => {
-            setItems(arr)
-         })
-   }, [])
 
    return (
       <div className="wrapper">
          <Header/>
          <div className="content">
             <div className="container">
-               <div className="contentTop">
-                  <Categories/>
-                  <Sort/>
-               </div>
-               <h2 className="contentTitle">Все пиццы</h2>
-               <div className="contentItems">
-                  {items.map((obj: PizzaType, index) => (
-                     <PizzaBlock key={obj.id} {...obj}/>
-                  ))}
-               </div>
+               <Routes>
+                  <Route path={'/'} element={<Main />} />
+                  <Route path={'/cart'} element={<Cart />} />
+                  <Route path={'*'} element={<NotFound />} />
+               </Routes>
             </div>
          </div>
       </div>
