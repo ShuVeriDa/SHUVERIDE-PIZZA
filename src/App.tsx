@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './scss/app.scss';
 import {Header} from "./components/Header";
 import {Categories} from "./components/Categories";
-import {PizzaBlock} from "./components/PizzaBlock";
+import {PizzaBlock} from "./components/PizzaBlock/PizzaBlock";
 import {Sort} from "./components/Sort";
 import {Main} from "./pages/Main";
 import {Route, Routes} from "react-router-dom";
