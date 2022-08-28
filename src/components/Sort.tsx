@@ -1,15 +1,24 @@
 import {FC, useState} from "react";
+import {SortType} from "../pages/Home";
 
-type SortPropsType = {}
+type SortPropsType = {
+   sortType: SortType
+   onClickSort: (sortType: SortType) => void
+}
 
-export const Sort: FC<SortPropsType> = () => {
+export const Sort: FC<SortPropsType> = ({sortType, onClickSort}) => {
    const [visible, setVisible] = useState<boolean>(false)
-   const [selected, setSelected] = useState<number>(0)
-   const list = ["популярности", "цене", "алфавиту"]
-   const sortName = list[selected]
+   const list = [
+      {name: "популярности (DESC)", sortProperty: 'rating'},
+      {name: "популярности (ASC)", sortProperty: '-rating'},
+      {name: "цене (DESC)", sortProperty: 'price'},
+      {name: "цене (ASC)", sortProperty: '-price'},
+      {name: "алфавиту (DESC)", sortProperty: 'title'},
+      {name: "алфавиту (ASC)", sortProperty: '-title'}
+   ]
 
-   const onClickListItem = (index: number) => {
-      setSelected(index)
+   const onClickListItem = (index: SortType) => {
+      onClickSort(index)
       setVisible(false)
    }
 
@@ -29,14 +38,14 @@ export const Sort: FC<SortPropsType> = () => {
                />
             </svg>
             <b>Сортировка по:</b>
-            <span onClick={() => setVisible(!visible)}>{sortName}</span>
+            <span onClick={() => setVisible(!visible)}>{sortType.name}</span>
          </div>
          {visible && <div className="sortPopup">
              <ul>
-                {list.map((name, index) => (
+                {list.map((obj, index) => (
                    <li key={index}
-                       onClick={() => onClickListItem(index)}
-                       className={selected === index ? 'active' : ''}>{name}</li>
+                       onClick={() => onClickListItem(obj)}
+                       className={sortType.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
                 ))}
              </ul>
          </div>}

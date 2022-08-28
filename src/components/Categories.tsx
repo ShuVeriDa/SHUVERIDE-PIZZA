@@ -1,20 +1,22 @@
-import React, {useState} from "react";
+import {FC, useState} from "react";
 
-type CategoriesPropsType = {}
-export const Categories: React.FC<CategoriesPropsType> = () => {
-   const [activeIndex, setActiveIndex] = useState<number>(0)
+type CategoriesPropsType = {
+   categoryID: number
+   onClickCategory: (categoryID: number) => void
+}
+export const Categories: FC<CategoriesPropsType> = ({categoryID, onClickCategory}) => {
 
    const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
 
    return (
       <div className="categories">
          <ul>
-            {categories.map((value, index) => {
+            {categories.map((categoryName, index) => {
                return <li key={index}
-                          onClick={() => setActiveIndex(index)}
-                          className={activeIndex === index ? "active" : ''}
+                          onClick={() => onClickCategory(index)}
+                          className={categoryID === index ? "active" : ''}
                >
-                  {value}
+                  {categoryName}
                </li>
             })}
          </ul>
