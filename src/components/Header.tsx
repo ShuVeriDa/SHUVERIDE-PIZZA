@@ -1,10 +1,14 @@
 import {FC} from "react";
 import logoSvg from '../assets/img/pizza-logo.svg'
 import {Link} from "react-router-dom";
+import {Search} from "./Search/Search";
 
-type HeaderPropsType = {}
+type HeaderPropsType = {
+   searchValue: string
+   setSearchValue: (searchValue: string) => void
+}
 
-export const Header: FC<HeaderPropsType> = () => {
+export const Header: FC<HeaderPropsType> = ({searchValue, setSearchValue}) => {
    return (
       <div className="header">
          <div className="container">
@@ -15,6 +19,8 @@ export const Header: FC<HeaderPropsType> = () => {
                   <p>самая вкусная пицца во вселенной</p>
                </div>
             </Link>
+
+            <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
             <div className="headerCart">
                <Link to="/cart" className="button buttonCart">
                   <span>520 ₽</span>
