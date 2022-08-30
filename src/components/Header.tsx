@@ -4,11 +4,11 @@ import {Link} from "react-router-dom";
 import {Search} from "./Search/Search";
 
 type HeaderPropsType = {
-   searchValue: string
-   setSearchValue: (searchValue: string) => void
+//    searchValue: string
+//    setSearchValue: (searchValue: string) => void
 }
 
-export const Header: FC<HeaderPropsType> = ({searchValue, setSearchValue}) => {
+export const Header: FC<HeaderPropsType> = () => {
    return (
       <div className="header">
          <div className="container">
@@ -20,7 +20,7 @@ export const Header: FC<HeaderPropsType> = ({searchValue, setSearchValue}) => {
                </div>
             </Link>
 
-            <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
+            <Search />
             <div className="headerCart">
                <Link to="/cart" className="button buttonCart">
                   <span>520 ₽</span>

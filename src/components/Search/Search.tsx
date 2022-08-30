@@ -1,12 +1,14 @@
 import classes from './Search.module.scss'
-import {ChangeEvent, FC} from "react";
+import {ChangeEvent, FC, useContext} from "react";
+import {SearchContext} from "../../App";
 
 type SearchPropsType = {
-   searchValue: string
-   setSearchValue: (searchValue: string) => void
+   // searchValue: string
+   // setSearchValue: (searchValue: string) => void
 }
 
-export const Search: FC<SearchPropsType> = ({searchValue, setSearchValue}) => {
+export const Search: FC<SearchPropsType> = () => {
+   const {searchValue, setSearchValue} = useContext(SearchContext)
    return (
       <div className={classes.root}>
          <svg className={classes.icon}
@@ -44,14 +46,14 @@ export const Search: FC<SearchPropsType> = ({searchValue, setSearchValue}) => {
                 placeholder='Поиск пиццы...'
                 className={classes.input}
                 value={searchValue}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.currentTarget.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue?.(e.currentTarget.value)}
          />
-         {searchValue &&  <svg className={classes.clearIcon}
-                               onClick={() => setSearchValue('')}
-                               height="48"
-                               viewBox="0 0 48 48"
-                               width="48"
-                               xmlns="http://www.w3.org/2000/svg"
+         {searchValue && <svg className={classes.clearIcon}
+                              onClick={() => setSearchValue?.('')}
+                              height="48"
+                              viewBox="0 0 48 48"
+                              width="48"
+                              xmlns="http://www.w3.org/2000/svg"
          >
              <path
                  d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>

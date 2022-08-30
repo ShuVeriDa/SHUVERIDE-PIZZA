@@ -1,14 +1,14 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useContext, useEffect, useState} from "react";
+
 import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
-import {PizzaType} from "../App";
+import {PizzaType, SearchContext} from "../App";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
 
 type HomePropsType = {
-   searchValue: string
-   setSearchValue: (searchValue: string) => void
+
 }
 
 export type SortType = {
@@ -16,7 +16,7 @@ export type SortType = {
    sortProperty: string,
 }
 
-export const Home: FC<HomePropsType> = ({searchValue, setSearchValue}) => {
+export const Home: FC<HomePropsType> = () => {
    const [items, setItems] = useState<PizzaType[]>([])
    const [isLoading, setIsLoading] = useState<boolean>(true)
    const [categoryId, setCategoryId] = useState<number>(0)
@@ -25,6 +25,8 @@ export const Home: FC<HomePropsType> = ({searchValue, setSearchValue}) => {
       name: 'популярности',
       sortProperty: 'rating',
    })
+
+   const {searchValue} = useContext(SearchContext)
 
    const array = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
    const skeleton = array.map((_, index) => <Skeleton key={index}/>)
