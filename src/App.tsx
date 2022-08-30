@@ -24,7 +24,6 @@ export type SearchContextType = {
 
 export const SearchContext = createContext<Partial<SearchContextType>>({})
 
-
 function App() {
    const [searchValue, setSearchValue] = useState<string>('')
 
