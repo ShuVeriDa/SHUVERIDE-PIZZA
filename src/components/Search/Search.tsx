@@ -1,6 +1,9 @@
 import classes from './Search.module.scss'
-import {ChangeEvent, FC, useContext, useRef} from "react";
+import {ChangeEvent, FC, useCallback, useContext, useRef, useState} from "react";
 import {SearchContext} from "../../App";
+import debounce from 'lodash.debounce';
+
+
 
 type SearchPropsType = {
    // searchValue: string
@@ -8,12 +11,26 @@ type SearchPropsType = {
 }
 
 export const Search: FC<SearchPropsType> = () => {
-   const {searchValue, setSearchValue} = useContext(SearchContext)
+   const {setSearchValue} = useContext(SearchContext)
+   const [value, setValue] = useState<string>('')
+
    const inputRef = useRef<HTMLInputElement>(null)
 
    const onClickRemoveTextSearch = () => {
       setSearchValue?.('')
+      setValue('')
       inputRef.current?.focus()
+   }
+
+   const updateSearchValue = useCallback(
+      debounce((str) => {
+         setSearchValue?.(str)
+      }, 350), []
+   )
+
+   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+      setValue(e.currentTarget.value)
+      updateSearchValue(e.currentTarget.value)
    }
 
    return (
@@ -53,10 +70,10 @@ export const Search: FC<SearchPropsType> = () => {
                 type="text"
                 placeholder='Поиск пиццы...'
                 className={classes.input}
-                value={searchValue}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue?.(e.currentTarget.value)}
+                value={value}
+                onChange={onChangeInput}
          />
-         {searchValue && <svg className={classes.clearIcon}
+         {value && <svg className={classes.clearIcon}
                               onClick={onClickRemoveTextSearch}
                               height="48"
                               viewBox="0 0 48 48"
