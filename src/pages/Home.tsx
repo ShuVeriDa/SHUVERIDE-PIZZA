@@ -6,6 +6,9 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {PizzaType, SearchContext} from "../App";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatchType, useAppSelector} from "../redux/store";
+import {setCategoryId} from "../redux/slices/filterSlice";
 
 type HomePropsType = {
 
@@ -17,9 +20,11 @@ export type SortType = {
 }
 
 export const Home: FC<HomePropsType> = () => {
+   const categoryId = useAppSelector(state => state.filter.categoryId)
+   const dispatch = useDispatch<AppDispatchType>()
+
    const [items, setItems] = useState<PizzaType[]>([])
    const [isLoading, setIsLoading] = useState<boolean>(true)
-   const [categoryId, setCategoryId] = useState<number>(0)
    const [currentPage, setCurrentPage] = useState<number>(1)
    const [sortType, setSortType] = useState<SortType>({
       name: 'популярности',
@@ -51,10 +56,14 @@ export const Home: FC<HomePropsType> = () => {
       window.scroll(0, 0)
    }, [categoryId, sortType, searchValue, currentPage])
 
+   const onClickCategory = (categoryId: number) => {
+      dispatch(setCategoryId(categoryId))
+   }
+
    return (
       <div className='container'>
          <div className="contentTop">
-            <Categories categoryID={categoryId} onClickCategory={(index: number) => setCategoryId(index)}/>
+            <Categories categoryID={categoryId} onClickCategory={onClickCategory}/>
             <Sort sortType={sortType} onClickSort={(sortType: SortType) => setSortType(sortType)}/>
          </div>
          <h2 className="contentTitle">Все пиццы</h2>
