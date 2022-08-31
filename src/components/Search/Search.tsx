@@ -1,5 +1,5 @@
 import classes from './Search.module.scss'
-import {ChangeEvent, FC, useContext} from "react";
+import {ChangeEvent, FC, useContext, useRef} from "react";
 import {SearchContext} from "../../App";
 
 type SearchPropsType = {
@@ -9,6 +9,13 @@ type SearchPropsType = {
 
 export const Search: FC<SearchPropsType> = () => {
    const {searchValue, setSearchValue} = useContext(SearchContext)
+   const inputRef = useRef<HTMLInputElement>(null)
+
+   const onClickRemoveTextSearch = () => {
+      setSearchValue?.('')
+      inputRef.current?.focus()
+   }
+
    return (
       <div className={classes.root}>
          <svg className={classes.icon}
@@ -42,14 +49,15 @@ export const Search: FC<SearchPropsType> = () => {
                   y2="20.366"
             />
          </svg>
-         <input type="text"
+         <input ref={inputRef}
+                type="text"
                 placeholder='Поиск пиццы...'
                 className={classes.input}
                 value={searchValue}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue?.(e.currentTarget.value)}
          />
          {searchValue && <svg className={classes.clearIcon}
-                              onClick={() => setSearchValue?.('')}
+                              onClick={onClickRemoveTextSearch}
                               height="48"
                               viewBox="0 0 48 48"
                               width="48"

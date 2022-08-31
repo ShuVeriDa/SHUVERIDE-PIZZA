@@ -1,4 +1,6 @@
 import React, {FC, useContext, useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+import axios from "axios";
 
 import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
@@ -6,9 +8,10 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {PizzaType, SearchContext} from "../App";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
-import {useDispatch, useSelector} from "react-redux";
+
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {setCategoryId} from "../redux/slices/filterSlice";
+
 
 type HomePropsType = {
 
@@ -42,10 +45,9 @@ export const Home: FC<HomePropsType> = () => {
       const category = categoryId > 0 ? `category=${categoryId}` : ''
       const search = searchValue ? `&search=${searchValue}` : ''
 
-      fetch(`https://630a32f93249910032824d12.mockapi.io/items?page=${currentPage}&limit=4&${category}sortBy=${sortBy}${search}&order=${order}`,)
-         .then((res) => res.json())
-         .then((arr) => {
-            setItems(arr)
+      axios.get(`https://630a32f93249910032824d12.mockapi.io/items?page=${currentPage}&limit=4&${category}sortBy=${sortBy}${search}&order=${order}`,)
+         .then((res) => {
+            setItems(res.data)
             setIsLoading(false)
          })
       window.scroll(0, 0)
