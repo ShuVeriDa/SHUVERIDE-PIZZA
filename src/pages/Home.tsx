@@ -1,6 +1,5 @@
 import React, {FC, useContext, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import axios from "axios";
 
 import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
@@ -11,11 +10,10 @@ import {Pagination} from "../components/Pagination/Pagination";
 
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {setCategoryId, setCurrentPage} from "../redux/slices/filterSlice";
+import {pizzasAPI} from "../api/pizza-api";
 
 
-type HomePropsType = {
-
-}
+type HomePropsType = {}
 
 export type SortType = {
    name: string,
@@ -33,8 +31,8 @@ export const Home: FC<HomePropsType> = () => {
    const array = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
    const skeleton = array.map((_, index) => <Skeleton key={index}/>)
    const pizzas = items.map((obj) => (
-         <PizzaBlock key={obj.id} {...obj}/>
-      ))
+      <PizzaBlock key={obj.id} {...obj}/>
+   ))
 
    useEffect(() => {
       setIsLoading(true)
@@ -44,7 +42,7 @@ export const Home: FC<HomePropsType> = () => {
       const category = categoryId > 0 ? `category=${categoryId}` : ''
       const search = searchValue ? `&search=${searchValue}` : ''
 
-      axios.get(`https://630a32f93249910032824d12.mockapi.io/items?page=${currentPage}&limit=4&${category}sortBy=${sortBy}${search}&order=${order}`,)
+      pizzasAPI.getPizzas(currentPage, sortBy, category, search, order)
          .then((res) => {
             setItems(res.data)
             setIsLoading(false)
@@ -64,7 +62,7 @@ export const Home: FC<HomePropsType> = () => {
       <div className='container'>
          <div className="contentTop">
             <Categories categoryID={categoryId} onClickCategory={onClickCategory}/>
-            <Sort />
+            <Sort/>
          </div>
          <h2 className="contentTitle">Все пиццы</h2>
          <div className="contentItems">
