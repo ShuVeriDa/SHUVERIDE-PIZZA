@@ -10,7 +10,7 @@ import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
 
 import {AppDispatchType, useAppSelector} from "../redux/store";
-import {setCategoryId} from "../redux/slices/filterSlice";
+import {setCategoryId, setCurrentPage} from "../redux/slices/filterSlice";
 
 
 type HomePropsType = {
@@ -23,13 +23,12 @@ export type SortType = {
 }
 
 export const Home: FC<HomePropsType> = () => {
-   const {categoryId, sort} = useAppSelector(state => state.filter)
+   const {categoryId, sort, currentPage} = useAppSelector(state => state.filter)
+   const {searchValue} = useContext(SearchContext)
    const dispatch = useDispatch<AppDispatchType>()
+
    const [items, setItems] = useState<PizzaType[]>([])
    const [isLoading, setIsLoading] = useState<boolean>(true)
-   const [currentPage, setCurrentPage] = useState<number>(1)
-
-   const {searchValue} = useContext(SearchContext)
 
    const array = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
    const skeleton = array.map((_, index) => <Skeleton key={index}/>)
@@ -57,6 +56,10 @@ export const Home: FC<HomePropsType> = () => {
       dispatch(setCategoryId(categoryId))
    }
 
+   const onChangePage = (num: number) => {
+      dispatch(setCurrentPage(num))
+   }
+
    return (
       <div className='container'>
          <div className="contentTop">
@@ -67,7 +70,7 @@ export const Home: FC<HomePropsType> = () => {
          <div className="contentItems">
             {isLoading ? skeleton : pizzas}
          </div>
-         <Pagination onChangePage={(number: number) => setCurrentPage(number)}/>
+         <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
       </div>
    );
 };
