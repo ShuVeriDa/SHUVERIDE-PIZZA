@@ -1,12 +1,17 @@
 import {FC, useState} from "react";
 import {SortType} from "../pages/Home";
+import {AppDispatchType, useAppSelector} from "../redux/store";
+import {useDispatch} from "react-redux";
+import {setSort} from "../redux/slices/filterSlice";
 
 type SortPropsType = {
-   sortType: SortType
-   onClickSort: (sortType: SortType) => void
+
 }
 
-export const Sort: FC<SortPropsType> = ({sortType, onClickSort}) => {
+export const Sort: FC<SortPropsType> = () => {
+   const {sort} = useAppSelector(state => state.filter)
+   const dispatch = useDispatch<AppDispatchType>()
+
    const [visible, setVisible] = useState<boolean>(false)
    const list = [
       {name: "популярности (DESC)", sortProperty: 'rating'},
@@ -17,8 +22,10 @@ export const Sort: FC<SortPropsType> = ({sortType, onClickSort}) => {
       {name: "алфавиту (ASC)", sortProperty: '-title'}
    ]
 
-   const onClickListItem = (index: SortType) => {
-      onClickSort(index)
+
+
+   const onClickListItem = (sortTypeId: SortType) => {
+      dispatch(setSort(sortTypeId))
       setVisible(false)
    }
 
@@ -38,14 +45,14 @@ export const Sort: FC<SortPropsType> = ({sortType, onClickSort}) => {
                />
             </svg>
             <b>Сортировка по:</b>
-            <span onClick={() => setVisible(!visible)}>{sortType.name}</span>
+            <span onClick={() => setVisible(!visible)}>{sort.name}</span>
          </div>
          {visible && <div className="sortPopup">
              <ul>
                 {list.map((obj, index) => (
                    <li key={index}
                        onClick={() => onClickListItem(obj)}
-                       className={sortType.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
+                       className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
                 ))}
              </ul>
          </div>}

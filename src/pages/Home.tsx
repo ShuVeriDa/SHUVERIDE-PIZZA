@@ -20,16 +20,11 @@ export type SortType = {
 }
 
 export const Home: FC<HomePropsType> = () => {
-   const categoryId = useAppSelector(state => state.filter.categoryId)
+   const {categoryId, sort} = useAppSelector(state => state.filter)
    const dispatch = useDispatch<AppDispatchType>()
-
    const [items, setItems] = useState<PizzaType[]>([])
    const [isLoading, setIsLoading] = useState<boolean>(true)
    const [currentPage, setCurrentPage] = useState<number>(1)
-   const [sortType, setSortType] = useState<SortType>({
-      name: 'популярности',
-      sortProperty: 'rating',
-   })
 
    const {searchValue} = useContext(SearchContext)
 
@@ -42,8 +37,8 @@ export const Home: FC<HomePropsType> = () => {
    useEffect(() => {
       setIsLoading(true)
 
-      const sortBy = sortType.sortProperty.replace('-', '')
-      const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
+      const sortBy = sort.sortProperty.replace('-', '')
+      const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
       const category = categoryId > 0 ? `category=${categoryId}` : ''
       const search = searchValue ? `&search=${searchValue}` : ''
 
@@ -54,7 +49,7 @@ export const Home: FC<HomePropsType> = () => {
             setIsLoading(false)
          })
       window.scroll(0, 0)
-   }, [categoryId, sortType, searchValue, currentPage])
+   }, [categoryId, sort, searchValue, currentPage])
 
    const onClickCategory = (categoryId: number) => {
       dispatch(setCategoryId(categoryId))
@@ -64,7 +59,7 @@ export const Home: FC<HomePropsType> = () => {
       <div className='container'>
          <div className="contentTop">
             <Categories categoryID={categoryId} onClickCategory={onClickCategory}/>
-            <Sort sortType={sortType} onClickSort={(sortType: SortType) => setSortType(sortType)}/>
+            <Sort />
          </div>
          <h2 className="contentTitle">Все пиццы</h2>
          <div className="contentItems">
