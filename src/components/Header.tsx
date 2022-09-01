@@ -2,6 +2,7 @@ import {FC} from "react";
 import logoSvg from '../assets/img/pizza-logo.svg'
 import {Link} from "react-router-dom";
 import {Search} from "./Search/Search";
+import {useAppSelector} from "../redux/store";
 
 type HeaderPropsType = {
 //    searchValue: string
@@ -9,6 +10,7 @@ type HeaderPropsType = {
 }
 
 export const Header: FC<HeaderPropsType> = () => {
+   const {totalPrice, items} = useAppSelector(state => state.cart)
    return (
       <div className="header">
          <div className="container">
@@ -23,7 +25,7 @@ export const Header: FC<HeaderPropsType> = () => {
             <Search />
             <div className="headerCart">
                <Link to="/cart" className="button buttonCart">
-                  <span>520 ₽</span>
+                  <span>{totalPrice} ₽</span>
                   <div className="buttonDelimiter"></div>
                   <svg
                      width="18"
@@ -54,7 +56,7 @@ export const Header: FC<HeaderPropsType> = () => {
                         strokeLinejoin="round"
                      />
                   </svg>
-                  <span>3</span>
+                  <span>{items.length}</span>
                </Link>
             </div>
          </div>
