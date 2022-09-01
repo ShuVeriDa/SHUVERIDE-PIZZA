@@ -7,7 +7,7 @@ const instance = axios.create({
 
 //api
 export const pizzasAPI = {
-   getPizzas: (currentPage: number, sortBy: string, category: string, search: string, order: string) => {
-      return instance.get(`items?page=${currentPage}&limit=4&${category}sortBy=${sortBy}${search}&order=${order}`)
+   getPizzas: (currentPage: number, category: string, sortBy: string, order: string, search: string,) => {
+      return instance.get(`items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`)
    }
 }
