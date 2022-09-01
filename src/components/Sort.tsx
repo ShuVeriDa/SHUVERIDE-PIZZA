@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import {SortType} from "../pages/Home";
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {useDispatch} from "react-redux";
@@ -20,6 +20,7 @@ export const sortList = [
 export const Sort: FC<SortPropsType> = () => {
    const {sort} = useAppSelector(state => state.filter)
    const dispatch = useDispatch<AppDispatchType>()
+   const sortRef = useRef(null)
 
    const [visible, setVisible] = useState<boolean>(false)
 
@@ -28,8 +29,22 @@ export const Sort: FC<SortPropsType> = () => {
       setVisible(false)
    }
 
+   useEffect(() => {
+      const handleClickOutside = (event: any) => {
+            if (!event.path.includes(sortRef.current)) {
+               setVisible(false)
+            }
+         }
+
+     document.body.addEventListener('click', handleClickOutside)
+
+      return () => {
+         document.body.removeEventListener('click', handleClickOutside)
+      }
+   }, [])
+
    return (
-      <div className="sort">
+      <div ref={sortRef} className="sort">
          <div className="sortLabel">
             <svg
                width="10"
