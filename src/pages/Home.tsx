@@ -84,15 +84,14 @@ export const Home: FC<HomePropsType> = () => {
 
    // Если был первый рендер, то запрашиваем пиццы
    useEffect(() => {
-     window.scrollTo(0, 0)
+      window.scrollTo(0, 0)
 
-      if(!isSearch.current) {
+      if (!isSearch.current) {
          fetchPizzas()
       }
 
       isSearch.current = false
    }, [categoryId, sort.sortProperty, currentPage])
-
 
 
    const onClickCategory = (categoryId: number) => {

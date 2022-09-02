@@ -4,14 +4,15 @@ import {useAppSelector} from "../../redux/store";
 import {addItem} from "../../redux/slices/cartSlice";
 
 export type PizzaBlockPropsType = {
-   id: number,
-   imageUrl: string,
-   title: string,
-   types: number[],
-   sizes: number[],
-   price: number,
-   category: number,
+   id: number
+   imageUrl: string
+   title: string
+   types: number[]
+   sizes: number[]
+   price: number
+   category: number
    rating: number
+   count: number
 }
 
 const typesName = ['тонкое', "традиционное"]
@@ -29,15 +30,15 @@ export const PizzaBlock: FC<PizzaBlockPropsType> = (
    const addedCount = cartItem ? cartItem.count : 0
 
    const onClickAdd = () => {
-      const items = {
+      const item = {
          id,
          price,
          title,
+         imageUrl,
          types: typesName[activeType],
-         sizes: activeSizes,
+         sizes: sizes[activeSizes],
       }
-
-      dispatch(addItem(items))
+      dispatch(addItem(item))
    }
 
    return (
