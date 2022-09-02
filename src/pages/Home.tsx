@@ -1,5 +1,7 @@
 import React, {FC, useContext, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import qs from "qs";
 
 import {Categories} from "../components/Categories";
 import {Sort, sortList} from "../components/Sort";
@@ -7,13 +9,9 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {PizzaType, SearchContext} from "../App";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
-
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice";
 import {pizzasAPI} from "../api/pizza-api";
-import {useNavigate} from "react-router-dom";
-import qs from "qs";
-
 
 type HomePropsType = {}
 
@@ -35,7 +33,7 @@ export const Home: FC<HomePropsType> = () => {
 
    const array = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined]
 
-   const fetchPizzas = () => {
+   const fetchPizzas = async () => {
       setIsLoading(true)
 
       const sortBy = sort.sortProperty.replace('-', '')
@@ -43,11 +41,15 @@ export const Home: FC<HomePropsType> = () => {
       const category = categoryId > 0 ? `category=${categoryId}` : ''
       const search = searchValue ? `search=${searchValue}` : ''
 
-      pizzasAPI.getPizzas(currentPage, category, sortBy, order, search)
-         .then((res) => {
-            setItems(res.data)
-            setIsLoading(false)
-         })
+      try {
+         const res = await pizzasAPI.getPizzas(currentPage, category, sortBy, order, search)
+         setItems(res.data)
+      } catch (error) {
+         console.log(error, 'Error')
+         alert('Ошибка при получении пицц')
+      } finally {
+         setIsLoading(false)
+      }
    }
 
 
