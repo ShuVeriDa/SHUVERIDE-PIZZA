@@ -7,7 +7,11 @@ const instance = axios.create({
 
 //api
 export const pizzasAPI = {
-   getPizzas: (currentPage: number, category: string, sortBy: string, order: string, search: string,) => {
-      return instance.get(`items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`)
+   getPizzas: (params: getPizzasParamsType) => {
+      return instance.get(`items?page=${params.currentPage}&limit=4&${params.category}&sortBy=${params.sortBy}&order=${params.order}&${params.search}`)
    }
+}
+
+export type getPizzasParamsType = {
+   currentPage: number, category: string, sortBy: string, order: string, search: string,
 }
