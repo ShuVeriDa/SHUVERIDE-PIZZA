@@ -1,4 +1,4 @@
-import React, {FC, useContext, useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import qs from "qs";
@@ -6,12 +6,11 @@ import qs from "qs";
 import {Categories} from "../components/Categories";
 import {Sort, sortList} from "../components/Sort";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
-import {SearchContext} from "../App";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
 import {AppDispatchType, useAppSelector} from "../redux/store";
-import {setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice";
-import {fetchPizzasTC} from "../redux/slices/pizzaSlice";
+import {selectSort, setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice";
+import {fetchPizzasTC, selectPizzaData} from "../redux/slices/pizzaSlice";
 
 type HomePropsType = {}
 
@@ -21,9 +20,9 @@ export type SortType = {
 }
 
 export const Home: FC<HomePropsType> = () => {
-   const {categoryId, sort, currentPage} = useAppSelector(state => state.filter)
-   const {items, status} = useAppSelector(state => state.pizza)
-   const {searchValue} = useContext(SearchContext)
+   const {categoryId, sort, currentPage, searchValue} = useAppSelector(selectSort)
+   const {items, status} = useAppSelector(selectPizzaData)
+
    const dispatch = useDispatch<AppDispatchType>()
    const isSearch = useRef(false)
    const isMounted = useRef(false)

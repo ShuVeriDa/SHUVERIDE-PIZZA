@@ -1,30 +1,27 @@
 import classes from './Search.module.scss'
 import {ChangeEvent, FC, useCallback, useContext, useRef, useState} from "react";
-import {SearchContext} from "../../App";
 import debounce from 'lodash.debounce';
-
-
+import {useDispatch} from "react-redux";
+import {setSearchValue} from "../../redux/slices/filterSlice";
 
 type SearchPropsType = {
-   // searchValue: string
-   // setSearchValue: (searchValue: string) => void
+
 }
 
 export const Search: FC<SearchPropsType> = () => {
-   const {setSearchValue} = useContext(SearchContext)
+   const dispatch = useDispatch()
    const [value, setValue] = useState<string>('')
-
    const inputRef = useRef<HTMLInputElement>(null)
 
    const onClickRemoveTextSearch = () => {
-      setSearchValue?.('')
+      dispatch(setSearchValue(''))
       setValue('')
       inputRef.current?.focus()
    }
 
    const updateSearchValue = useCallback(
-      debounce((str) => {
-         setSearchValue?.(str)
+      debounce((str: string) => {
+         dispatch(setSearchValue(str))
       }, 350), []
    )
 

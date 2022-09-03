@@ -18,20 +18,9 @@ export type PizzaType = {
    count: number
 }
 
-export type SearchContextType = {
-   searchValue: string
-   setSearchValue: (searchValue: string) => void
-}
-
-export const SearchContext = createContext<Partial<SearchContextType>>({})
-
 function App() {
-   const [searchValue, setSearchValue] = useState<string>('')
-
-   console.log(searchValue)
    return (
       <div className="wrapper">
-         <SearchContext.Provider value={{searchValue, setSearchValue}}>
             <Header/>
             <div className="content">
                <Routes>
@@ -40,7 +29,6 @@ function App() {
                   <Route path={'*'} element={<NotFound />} />
                </Routes>
             </div>
-         </SearchContext.Provider>
       </div>
    );
 }

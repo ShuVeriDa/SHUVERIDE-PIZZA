@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {PizzaType} from "../../App";
 import {getPizzasParamsType, pizzasAPI} from "../../api/pizza-api";
+import {RootState} from "../store";
 
 const initialState: InitialStateType = {
    items: [],
@@ -33,6 +34,9 @@ export const pizzaSlice = createSlice({
    }
 
 })
+
+export const selectPizzaData = (state: RootState) => state.pizza
+
 
 export const {} = pizzaSlice.actions
 export const pizzaReducer = pizzaSlice.reducer

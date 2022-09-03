@@ -2,7 +2,7 @@ import {FC, useEffect, useRef, useState} from "react";
 import {SortType} from "../pages/Home";
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {useDispatch} from "react-redux";
-import {setSort} from "../redux/slices/filterSlice";
+import {selectSort, setSort} from "../redux/slices/filterSlice";
 
 type SortPropsType = {
 
@@ -18,7 +18,7 @@ export const sortList = [
 ]
 
 export const Sort: FC<SortPropsType> = () => {
-   const {sort} = useAppSelector(state => state.filter)
+   const {sort} = useAppSelector(selectSort)
    const dispatch = useDispatch<AppDispatchType>()
    const sortRef = useRef(null)
 

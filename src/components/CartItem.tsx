@@ -14,8 +14,6 @@ type CartItemPropsType = {
    count: number
 }
 
-const typesName = ['тонкое', "традиционное"]
-
 export const CartItem: FC<CartItemPropsType> = (
    {
       id, types, sizes, imageUrl, title,
