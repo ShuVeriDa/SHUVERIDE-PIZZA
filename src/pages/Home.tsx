@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef} from "react";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import qs from "qs";
 
 import {Categories} from "../components/Categories";
@@ -92,7 +92,7 @@ export const Home: FC<HomePropsType> = () => {
 
    const skeleton = array.map((_, index) => <Skeleton key={index}/>)
    const pizzas = items.map((obj) => (
-      <PizzaBlock key={obj.id} {...obj}/>
+      <Link key={obj.id} to={`/pizza/${obj.id}`}><PizzaBlock  {...obj}/></Link>
    ))
 
    return (

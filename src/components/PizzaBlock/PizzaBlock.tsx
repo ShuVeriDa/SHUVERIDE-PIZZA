@@ -4,7 +4,7 @@ import {useAppSelector} from "../../redux/store";
 import {addItem, selectCartItemById} from "../../redux/slices/cartSlice";
 
 export type PizzaBlockPropsType = {
-   id: number
+   id: string
    imageUrl: string
    title: string
    types: number[]

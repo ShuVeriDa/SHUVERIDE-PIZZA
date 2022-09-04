@@ -5,9 +5,10 @@ import {Home} from "./pages/Home";
 import {Route, Routes} from "react-router-dom";
 import {NotFound} from "./pages/NotFound";
 import {Cart} from "./pages/Cart";
+import {FullPizza} from "./pages/FullPizza";
 
 export type PizzaType = {
-   id: number,
+   id: string,
    imageUrl: string,
    title: string,
    types: number[],
@@ -26,6 +27,7 @@ function App() {
                <Routes>
                   <Route path={'/'} element={<Home />} />
                   <Route path={'/cart'} element={<Cart />} />
+                  <Route path={'/pizza/:id'} element={<FullPizza />} />
                   <Route path={'*'} element={<NotFound />} />
                </Routes>
             </div>
