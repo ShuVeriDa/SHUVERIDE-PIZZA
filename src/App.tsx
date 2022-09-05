@@ -1,6 +1,6 @@
-import React from 'react';
-import './scss/app.scss';
 import {Route, Routes} from "react-router-dom";
+
+import './scss/app.scss';
 import {MainLayout} from "./layouts/MainLayout";
 import {FullPizza} from "./pages/FullPizza";
 import {Home} from "./pages/Home";
@@ -8,13 +8,13 @@ import {Cart} from "./pages/Cart";
 import {NotFound} from "./pages/NotFound";
 
 export type PizzaType = {
-   id: string,
-   imageUrl: string,
-   title: string,
-   types: number[],
-   sizes: number[],
-   price: number,
-   category: number,
+   id: string
+   imageUrl: string
+   title: string
+   types: number[]
+   sizes: number[]
+   price: number
+   category: number
    rating: number
    count: number
 }

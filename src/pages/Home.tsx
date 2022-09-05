@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef} from "react";
 import {useDispatch} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import qs from "qs";
 
 import {Categories} from "../components/Categories";

@@ -1,12 +1,11 @@
-import classes from './Search.module.scss'
-import {ChangeEvent, FC, useCallback, useContext, useRef, useState} from "react";
+import {ChangeEvent, FC, useCallback, useRef, useState} from "react";
 import debounce from 'lodash.debounce';
 import {useDispatch} from "react-redux";
+
+import classes from './Search.module.scss'
 import {setSearchValue} from "../../redux/slices/filterSlice";
 
-type SearchPropsType = {
-
-}
+type SearchPropsType = {}
 
 export const Search: FC<SearchPropsType> = () => {
    const dispatch = useDispatch()

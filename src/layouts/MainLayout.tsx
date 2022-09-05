@@ -1,10 +1,9 @@
-import {Header} from "../components/Header";
 import {FC} from "react";
+
+import {Header} from "../components/Header";
 import {Outlet} from "react-router-dom";
 
-type MainLayoutPropsType = {
-
-}
+type MainLayoutPropsType = {}
 
 export const MainLayout: FC<MainLayoutPropsType> = () => {
    return (

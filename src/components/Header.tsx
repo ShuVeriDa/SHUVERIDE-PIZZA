@@ -1,13 +1,12 @@
 import {FC} from "react";
-import logoSvg from '../assets/img/pizza-logo.svg'
 import {Link, useLocation} from "react-router-dom";
+
+import {selectCart} from "../redux/slices/cartSlice";
+import logoSvg from '../assets/img/pizza-logo.svg'
 import {Search} from "./Search/Search";
 import {useAppSelector} from "../redux/store";
-import {selectCart} from "../redux/slices/cartSlice";
 
-type HeaderPropsType = {
-
-}
+type HeaderPropsType = {}
 
 export const Header: FC<HeaderPropsType> = () => {
    const {totalPrice, items} = useAppSelector(selectCart)

@@ -1,12 +1,11 @@
 import {FC, useEffect, useRef, useState} from "react";
-import {SortType} from "../pages/Home";
-import {AppDispatchType, useAppSelector} from "../redux/store";
 import {useDispatch} from "react-redux";
+import {SortType} from "../pages/Home";
+
+import {AppDispatchType, useAppSelector} from "../redux/store";
 import {selectSort, setSort} from "../redux/slices/filterSlice";
 
-type SortPropsType = {
-
-}
+type SortPropsType = {}
 
 export const sortList = [
    {name: "популярности (DESC)", sortProperty: 'rating'},

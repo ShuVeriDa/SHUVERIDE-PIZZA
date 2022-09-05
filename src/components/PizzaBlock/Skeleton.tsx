@@ -1,6 +1,9 @@
+import {FC} from "react";
 import ContentLoader from "react-content-loader"
 
-export const Skeleton = () => (
+type SkeletonPropsType = {}
+
+export const Skeleton: FC<SkeletonPropsType> = () => (
    <ContentLoader
       className='pizzaBlock'
       speed={2}

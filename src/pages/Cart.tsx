@@ -1,11 +1,15 @@
+import {FC} from "react";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
+
 import {CartItem} from "../components/CartItem";
 import {useAppSelector} from "../redux/store";
 import {clearItems, selectCart} from "../redux/slices/cartSlice";
-import {useDispatch} from "react-redux";
 import {CartEmpty} from "../components/CartEmpty";
 
-export const Cart = () => {
+type CartPropsType = {}
+
+export const Cart: FC<CartPropsType> = () => {
    const dispatch = useDispatch()
    const {totalPrice, items} = useAppSelector(selectCart)
 

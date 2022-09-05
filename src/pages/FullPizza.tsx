@@ -1,9 +1,14 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import axios from "axios";
+
 import {PizzaType} from "../App";
 
-export const FullPizza = () => {
+type FullPizzaPropsType = {
+
+}
+
+export const FullPizza: FC<FullPizzaPropsType> = () => {
    const [pizza, setPizza] = useState<PizzaType>()
    const {id} = useParams()
    const navigate = useNavigate()
@@ -23,7 +28,7 @@ export const FullPizza = () => {
    },[])
 
    if (!pizza) {
-      return <h4>Loading...</h4>
+      return <>Loading...</>
    }
    return (
       <div className='container'>
