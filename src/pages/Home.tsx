@@ -91,9 +91,7 @@ export const Home: FC<HomePropsType> = () => {
    }
 
    const skeleton = array.map((_, index) => <Skeleton key={index}/>)
-   const pizzas = items.map((obj) => (
-      <Link key={obj.id} to={`/pizza/${obj.id}`}><PizzaBlock  {...obj}/></Link>
-   ))
+   const pizzas = items.map((obj) => <PizzaBlock key={obj.id}  {...obj}/>)
 
    return (
       <div className='container'>
