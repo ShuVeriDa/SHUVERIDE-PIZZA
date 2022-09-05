@@ -18,3 +18,17 @@ export const pizzasAPI = {
 export type getPizzasParamsType = {
    currentPage: number, category: string, sortBy: string, order: string, search: string,
 }
+
+
+//types
+export type PizzaType = {
+   id: string
+   imageUrl: string
+   title: string
+   types: number[]
+   sizes: number[]
+   price: number
+   category: number
+   rating: number
+   count: number
+}

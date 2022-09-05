@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {PizzaType} from "../../App";
 import {RootState} from "../store";
+import {PizzaType} from "../../api/pizza-api";
 
 const initialState: InitialStateType = {
    items: [],

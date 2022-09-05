@@ -19,7 +19,6 @@ export const Pagination: FC<PaginationPropsType> = ({currentPage,onChangePage}) 
          pageRangeDisplayed={4}
          pageCount={3}
          forcePage={currentPage - 1}
-         // renderOnZeroPageCount={null}
       />
    );
 };

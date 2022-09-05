@@ -14,11 +14,6 @@ import {fetchPizzasTC, selectPizzaData} from "../redux/slices/pizzaSlice";
 
 type HomePropsType = {}
 
-export type SortType = {
-   name: string,
-   sortProperty: string,
-}
-
 export const Home: FC<HomePropsType> = () => {
    const {categoryId, sort, currentPage, searchValue} = useAppSelector(selectSort)
    const {items, status} = useAppSelector(selectPizzaData)
@@ -86,8 +81,8 @@ export const Home: FC<HomePropsType> = () => {
       dispatch(setCategoryId(categoryId))
    }
 
-   const onChangePage = (num: number) => {
-      dispatch(setCurrentPage(num))
+   const onChangePage = (page: number) => {
+      dispatch(setCurrentPage(page))
    }
 
    const skeleton = array.map((_, index) => <Skeleton key={index}/>)

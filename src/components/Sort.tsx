@@ -1,13 +1,17 @@
 import {FC, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
-import {SortType} from "../pages/Home";
 
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {selectSort, setSort} from "../redux/slices/filterSlice";
 
 type SortPropsType = {}
 
-export const sortList = [
+type SortListType = {
+   name: string
+   sortProperty: string
+}
+
+export const sortList: SortListType[] = [
    {name: "популярности (DESC)", sortProperty: 'rating'},
    {name: "популярности (ASC)", sortProperty: '-rating'},
    {name: "цене (DESC)", sortProperty: 'price'},
@@ -19,23 +23,23 @@ export const sortList = [
 export const Sort: FC<SortPropsType> = () => {
    const {sort} = useAppSelector(selectSort)
    const dispatch = useDispatch<AppDispatchType>()
-   const sortRef = useRef(null)
+   const sortRef = useRef<HTMLDivElement>(null)
 
    const [visible, setVisible] = useState<boolean>(false)
 
-   const onClickListItem = (sortTypeId: SortType) => {
+   const onClickListItem = (sortTypeId: SortListType) => {
       dispatch(setSort(sortTypeId))
       setVisible(false)
    }
 
    useEffect(() => {
       const handleClickOutside = (event: any) => {
-            if (!event.path.includes(sortRef.current)) {
-               setVisible(false)
-            }
+         if (!event.path.includes(sortRef.current)) {
+            setVisible(false)
          }
+      }
 
-     document.body.addEventListener('click', handleClickOutside)
+      document.body.addEventListener('click', handleClickOutside)
 
       return () => {
          document.body.removeEventListener('click', handleClickOutside)

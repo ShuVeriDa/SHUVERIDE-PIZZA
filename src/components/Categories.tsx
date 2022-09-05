@@ -5,8 +5,7 @@ type CategoriesPropsType = {
    onClickCategory: (categoryID: number) => void
 }
 export const Categories: FC<CategoriesPropsType> = ({categoryID, onClickCategory}) => {
-
-   const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
+   const categories: string[] = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
 
    return (
       <div className="categories">

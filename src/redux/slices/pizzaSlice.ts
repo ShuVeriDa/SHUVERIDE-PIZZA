@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {PizzaType} from "../../App";
-import {getPizzasParamsType, pizzasAPI} from "../../api/pizza-api";
+import {getPizzasParamsType, pizzasAPI, PizzaType} from "../../api/pizza-api";
 import {RootState} from "../store";
 
 const initialState: InitialStateType = {

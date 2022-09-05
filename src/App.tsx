@@ -7,18 +7,6 @@ import {Home} from "./pages/Home";
 import {Cart} from "./pages/Cart";
 import {NotFound} from "./pages/NotFound";
 
-export type PizzaType = {
-   id: string
-   imageUrl: string
-   title: string
-   types: number[]
-   sizes: number[]
-   price: number
-   category: number
-   rating: number
-   count: number
-}
-
 function App() {
    return (
       <Routes>
