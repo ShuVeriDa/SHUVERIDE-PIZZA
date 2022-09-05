@@ -4,22 +4,13 @@ import {useDispatch} from "react-redux";
 
 import {useAppSelector} from "../../redux/store";
 import {addItem, selectCartItemById} from "../../redux/slices/cartSlice";
+import {PizzaType} from "../../api/pizza-api";
 
-export type PizzaBlockPropsType = {
-   id: string
-   imageUrl: string
-   title: string
-   types: number[]
-   sizes: number[]
-   price: number
-   category: number
-   rating: number
-   count: number
-}
+export type PizzaBlockPropsType = {}
 
 const typesName = ['тонкое', "традиционное"]
 
-export const PizzaBlock: FC<PizzaBlockPropsType> = (
+export const PizzaBlock: FC<PizzaBlockPropsType & PizzaType> = (
    {
       title, price, types, id,
       rating, category, sizes, imageUrl

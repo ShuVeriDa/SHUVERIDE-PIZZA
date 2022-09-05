@@ -2,20 +2,11 @@ import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
 
 import {addItem, minusItem, removeItems} from "../redux/slices/cartSlice";
+import {PizzaType} from "../api/pizza-api";
 
-type CartItemPropsType = {
-   id: string,
-   imageUrl: string,
-   title: string,
-   types: number[],
-   sizes: number[],
-   price: number,
-   category: number,
-   rating: number
-   count: number
-}
+type CartItemPropsType = {}
 
-export const CartItem: FC<CartItemPropsType> = (
+export const CartItem: FC<CartItemPropsType & PizzaType> = (
    {
       id, types, sizes, imageUrl, title,
       price, count

@@ -4,9 +4,7 @@ import axios from "axios";
 
 import {PizzaType} from "../api/pizza-api";
 
-type FullPizzaPropsType = {
-
-}
+type FullPizzaPropsType = {}
 
 export const FullPizza: FC<FullPizzaPropsType> = () => {
    const [pizza, setPizza] = useState<PizzaType>()
