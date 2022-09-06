@@ -4,13 +4,14 @@ import {useNavigate} from "react-router-dom";
 import qs from "qs";
 
 import {Categories} from "../components/Categories";
-import {Sort, sortList} from "../components/Sort";
+import {sortList, SortPopup} from "../components/SortPopup";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {selectSort, setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice";
 import {fetchPizzasTC, selectPizzaData} from "../redux/slices/pizzaSlice";
+import {SearchPizzasParamsType} from "../api/pizza-api";
 
 type HomePropsType = {}
 
@@ -34,37 +35,36 @@ export const Home: FC<HomePropsType> = () => {
       dispatch(fetchPizzasTC({currentPage, category, sortBy, order, search}))
    }
 
-// Если изменили параметры и был первый рендер
-   useEffect(() => {
-      if (isMounted.current) {
-         const queryString = qs.stringify({
-            sortProperty: sort.sortProperty,
-            categoryId,
-            currentPage
-         })
-
-         navigate(`?${queryString}`)
-      }
-      isMounted.current = true
-   }, [categoryId, sort.sortProperty, currentPage])
-
-   //Если был первый рендер, то проверяем URL - параметры и сохраняем в редаксе
-   useEffect(() => {
-      if (window.location.search) {
-         const params = qs.parse(window.location.search.substring(1))
-
-         const sort = sortList.find((obj) => obj.sortProperty === params.sortProperty)
-
-         dispatch(
-            setFilters({
-               ...params,
-               sort,
-            })
-         )
-         isSearch.current = true
-      }
-   }, [])
-
+// // Если изменили параметры и был первый рендер
+//    useEffect(() => {
+//       if (isMounted.current) {
+//          const queryString = qs.stringify({
+//             sortProperty: sort.sortProperty,
+//             categoryId,
+//             currentPage
+//          })
+//
+//          navigate(`?${queryString}`)
+//       }
+//       isMounted.current = true
+//    }, [categoryId, sort.sortProperty, currentPage])
+//
+//    //Если был первый рендер, то проверяем URL - параметры и сохраняем в редаксе
+//    useEffect(() => {
+//       if (window.location.search) {
+//          const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzasParamsType
+//          const sort = sortList.find((obj) => obj.sortProperty === params.sortBy)
+//
+//          dispatch(setFilters({
+//                searchValue: params.search,
+//                categoryId: Number(params.category),
+//                currentPage: params.currentPage,
+//                sort: sort || sortList[0],
+//             })
+//          )
+//          isSearch.current = true
+//       }
+//    }, [])
    // Если был первый рендер, то запрашиваем пиццы
    useEffect(() => {
       window.scrollTo(0, 0)
@@ -92,16 +92,16 @@ export const Home: FC<HomePropsType> = () => {
       <div className='container'>
          <div className="contentTop">
             <Categories categoryID={categoryId} onClickCategory={onClickCategory}/>
-            <Sort/>
+            <SortPopup/>
          </div>
          <h2 className="contentTitle">Все пиццы</h2>
-            {status === "error"
-               ? <div className="contentErrorInfo">
-                  <h2>Произошла ошибка</h2>
-                  <p>К сожалению, не удалось получить пиццы. Попробуйте повторить попытку позже</p>
+         {status === "error"
+            ? <div className="contentErrorInfo">
+               <h2>Произошла ошибка</h2>
+               <p>К сожалению, не удалось получить пиццы. Попробуйте повторить попытку позже</p>
             </div>
-               :  <div className="contentItems">{status === 'loading' ? skeleton : pizzas}</div>
-            }
+            : <div className="contentItems">{status === 'loading' ? skeleton : pizzas}</div>
+         }
          <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
       </div>
    );

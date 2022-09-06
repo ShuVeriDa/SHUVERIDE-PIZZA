@@ -1,6 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
 import {RootState} from "../store";
-import {PizzaType} from "../../api/pizza-api";
 
 const initialState: InitialStateType = {
    items: [],
@@ -11,7 +11,7 @@ export const cartSlice = createSlice({
    name: 'cart',
    initialState,
    reducers: {
-      addItem: (state, action) => {
+      addItem: (state, action: PayloadAction<CartItemType>) => {
          const findItem = state.items.find(item => item.id === action.payload.id)
 
          if (findItem) {
@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
             return obj.price * obj.count + sum
          }, 0)
       },
-      minusItem: (state, action) => {
+      minusItem: (state, action: PayloadAction<string>) => {
          const findItem = state.items.find(item => item.id === action.payload)
 
          if (findItem) {
@@ -38,7 +38,7 @@ export const cartSlice = createSlice({
             return obj.price * obj.count + sum
          }, 0)
       },
-      removeItems: (state, action) => {
+      removeItems: (state, action: PayloadAction<string>) => {
          state.items = state.items.filter(p => p.id !== action.payload)
       },
       clearItems: (state, action) => {
@@ -55,7 +55,17 @@ export const {addItem, removeItems, clearItems, minusItem} = cartSlice.actions
 export const cartReducer = cartSlice.reducer
 
 //types
-export type InitialStateType = {
-   totalPrice: number,
-   items: PizzaType[]
+interface InitialStateType {
+   totalPrice: number
+   items: CartItemType[]
+}
+
+export type CartItemType = {
+   id: string;
+   title: string;
+   price: number;
+   imageUrl: string;
+   type: string;
+   size: number;
+   count: number;
 }

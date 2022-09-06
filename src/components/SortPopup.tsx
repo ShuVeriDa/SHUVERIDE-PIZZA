@@ -2,32 +2,33 @@ import {FC, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 
 import {AppDispatchType, useAppSelector} from "../redux/store";
-import {selectSort, setSort} from "../redux/slices/filterSlice";
+import {selectSort, setSort, SortPropertyEnum, SortType} from "../redux/slices/filterSlice";
+
+
+type SortItemType = {
+   name: string
+   sortProperty: SortPropertyEnum
+}
+
+export const sortList: SortItemType[] = [
+   {name: "популярности (DESC)", sortProperty: SortPropertyEnum.RATING_DESK},
+   {name: "популярности (ASC)", sortProperty: SortPropertyEnum.RATING_ASC},
+   {name: "цене (DESC)", sortProperty: SortPropertyEnum.PRICE_DESK},
+   {name: "цене (ASC)", sortProperty: SortPropertyEnum.PRICE_ASC},
+   {name: "алфавиту (DESC)", sortProperty: SortPropertyEnum.TITLE_DESK},
+   {name: "алфавиту (ASC)", sortProperty: SortPropertyEnum.TITLE_ASC}
+]
 
 type SortPropsType = {}
 
-type SortListType = {
-   name: string
-   sortProperty: string
-}
-
-export const sortList: SortListType[] = [
-   {name: "популярности (DESC)", sortProperty: 'rating'},
-   {name: "популярности (ASC)", sortProperty: '-rating'},
-   {name: "цене (DESC)", sortProperty: 'price'},
-   {name: "цене (ASC)", sortProperty: '-price'},
-   {name: "алфавиту (DESC)", sortProperty: 'title'},
-   {name: "алфавиту (ASC)", sortProperty: '-title'}
-]
-
-export const Sort: FC<SortPropsType> = () => {
+export const SortPopup: FC<SortPropsType> = () => {
    const {sort} = useAppSelector(selectSort)
    const dispatch = useDispatch<AppDispatchType>()
    const sortRef = useRef<HTMLDivElement>(null)
 
    const [visible, setVisible] = useState<boolean>(false)
 
-   const onClickListItem = (sortTypeId: SortListType) => {
+   const onClickListItem = (sortTypeId: SortType) => {
       dispatch(setSort(sortTypeId))
       setVisible(false)
    }

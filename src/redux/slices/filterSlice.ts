@@ -1,13 +1,22 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 
-const initialState: InitialStateType = {
+export enum SortPropertyEnum {
+   RATING_DESK = "rating",
+   RATING_ASC= "-rating",
+   TITLE_DESK = "title",
+   TITLE_ASC= "-title",
+   PRICE_DESK = "price",
+   PRICE_ASC= "-price",
+}
+
+const initialState: FilterSliceStateType = {
    categoryId: 0,
    currentPage: 1,
    searchValue: '',
    sort: {
       name: 'популярности',
-      sortProperty: 'rating',
+      sortProperty: SortPropertyEnum.RATING_DESK,
    }
 }
 
@@ -15,21 +24,22 @@ export const filterSlice = createSlice({
    name: 'filters',
    initialState,
    reducers: {
-      setCategoryId: (state, action) => {
+      setCategoryId: (state, action: PayloadAction<number>) => {
          state.categoryId = action.payload
       },
-      setSort: (state, action) => {
+      setSort: (state, action: PayloadAction<SortType>) => {
          state.sort = action.payload
       },
-      setCurrentPage: (state, action) => {
+      setCurrentPage: (state, action: PayloadAction<number>) => {
          state.currentPage = action.payload
       },
-      setFilters: (state, action) => {
-         state.sort.sortProperty = action.payload.currentPage
-         state.currentPage = Number(action.payload.currentPage)
-         state.categoryId = Number(action.payload.categoryId)
+      setFilters: (state, action: PayloadAction<FilterSliceStateType>) => {
+            state.sort.sortProperty = action.payload.sort.sortProperty
+            state.currentPage = Number(action.payload.currentPage)
+            state.categoryId = Number(action.payload.categoryId)
+
       },
-      setSearchValue: (state, action) => {
+      setSearchValue: (state, action: PayloadAction<string>) => {
          state.searchValue = action.payload
       }
    }
@@ -41,12 +51,16 @@ export const {setCategoryId, setSort, setCurrentPage, setFilters, setSearchValue
 export const filterReducer = filterSlice.reducer
 
 //types
-export type InitialStateType = {
+export interface FilterSliceStateType {
    categoryId: number
    currentPage: number
    searchValue: string
-   sort: {
-      name: string
-      sortProperty: string
-   }
+   sort: SortType
+}
+
+
+
+export type SortType = {
+   name: string
+   sortProperty: SortPropertyEnum
 }

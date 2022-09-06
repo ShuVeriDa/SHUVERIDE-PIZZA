@@ -1,21 +1,20 @@
 import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
 
-import {addItem, minusItem, removeItems} from "../redux/slices/cartSlice";
-import {PizzaType} from "../api/pizza-api";
+import {addItem, CartItemType, minusItem, removeItems} from "../redux/slices/cartSlice";
 
 type CartItemPropsType = {}
 
-export const CartItem: FC<CartItemPropsType & PizzaType> = (
+export const CartItemBlock: FC<CartItemPropsType & CartItemType> = (
    {
-      id, types, sizes, imageUrl, title,
+      id, type, size, imageUrl, title,
       price, count
    }
 ) => {
    const dispatch = useDispatch()
 
    const onClickPlus = () => {
-      dispatch(addItem({id}))
+      dispatch(addItem({id} as CartItemType))
    }
 
    const onClickMinus = () => {
@@ -39,7 +38,7 @@ export const CartItem: FC<CartItemPropsType & PizzaType> = (
          </div>
          <div className="cartItemInfo">
             <h3>{title}</h3>
-            <p>{types}, {sizes} см.</p>
+            <p>{type}, {size} см.</p>
          </div>
          <div className="cartItemCount">
             <div onClick={onClickMinus} className="button buttonOutline buttonCircle cartItemCountMinus">

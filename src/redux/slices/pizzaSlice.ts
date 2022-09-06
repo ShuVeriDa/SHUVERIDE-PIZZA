@@ -1,15 +1,21 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {getPizzasParamsType, pizzasAPI, PizzaType} from "../../api/pizza-api";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {SearchPizzasParamsType, pizzasAPI} from "../../api/pizza-api";
 import {RootState} from "../store";
+
+export enum Status {
+   LOADING = 'loading',
+   SUCCESS = 'success',
+   ERROR = 'error'
+}
 
 const initialState: InitialStateType = {
    items: [],
-   status: 'idle'
+   status: Status.LOADING
 }
 
-export const fetchPizzasTC = createAsyncThunk<PizzaType[], getPizzasParamsType>('pizza/fetchPizzasStatus', async (param, thunkAPI) => {
-      const res = await pizzasAPI.getPizzas(param)
-      return res.data
+export const fetchPizzasTC = createAsyncThunk<PizzaType[], SearchPizzasParamsType>('pizza/fetchPizzasStatus', async (param) => {
+   const res = await pizzasAPI.getPizzas(param)
+   return res.data
 })
 
 export const pizzaSlice = createSlice({
@@ -19,15 +25,15 @@ export const pizzaSlice = createSlice({
    extraReducers: builder => {
       builder
          .addCase(fetchPizzasTC.pending, (state) => {
-            state.status = 'loading'
+            state.status = Status.LOADING
             state.items = []
          })
          .addCase(fetchPizzasTC.fulfilled, (state, action) => {
-            state.status = 'success'
+            state.status = Status.SUCCESS
             state.items = action.payload
          })
          .addCase(fetchPizzasTC.rejected, (state) => {
-            state.status = 'error'
+            state.status = Status.ERROR
             state.items = []
          })
    }
@@ -41,9 +47,19 @@ export const {} = pizzaSlice.actions
 export const pizzaReducer = pizzaSlice.reducer
 
 //types
-export type InitialStateType = {
+interface InitialStateType {
    items: PizzaType[]
-   status: RequestStatusType
+   status: Status
 }
 
-export type RequestStatusType = 'idle' | 'loading' | 'success' | 'error'
+//types
+export type PizzaType = {
+   id: string;
+   title: string;
+   price: number;
+   imageUrl: string;
+   sizes: number[];
+   types: number[];
+   rating: number;
+   count: number
+}

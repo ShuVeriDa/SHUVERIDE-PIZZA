@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
 import {useAppSelector} from "../../redux/store";
-import {addItem, selectCartItemById} from "../../redux/slices/cartSlice";
-import {PizzaType} from "../../api/pizza-api";
+import {addItem, CartItemType, selectCartItemById} from "../../redux/slices/cartSlice";
+import {PizzaType} from "../../redux/slices/pizzaSlice";
 
 export type PizzaBlockPropsType = {}
 
@@ -12,8 +12,7 @@ const typesName = ['тонкое', "традиционное"]
 
 export const PizzaBlock: FC<PizzaBlockPropsType & PizzaType> = (
    {
-      title, price, types, id,
-      rating, category, sizes, imageUrl
+      title, price, types, id, sizes, imageUrl
    }) => {
    const dispatch = useDispatch()
    const cartItem = useAppSelector(selectCartItemById(id))
@@ -23,13 +22,14 @@ export const PizzaBlock: FC<PizzaBlockPropsType & PizzaType> = (
    const addedCount = cartItem ? cartItem.count : 0
 
    const onClickAdd = () => {
-      const item = {
+      const item: CartItemType = {
          id,
          price,
          title,
          imageUrl,
-         types: typesName[activeType],
-         sizes: sizes[activeSizes],
+         type: typesName[activeType],
+         size: sizes[activeSizes],
+         count: 0
       }
       dispatch(addItem(item))
    }
@@ -38,13 +38,13 @@ export const PizzaBlock: FC<PizzaBlockPropsType & PizzaType> = (
       <div className='pizzaBlockWrapper'>
          <div className="pizzaBlock">
             <Link to={`/pizza/${id}`}>
-            <img
-               className="pizzaBlockImage"
-               src={imageUrl}
-               alt="Pizza"
-            />
+               <img
+                  className="pizzaBlockImage"
+                  src={imageUrl}
+                  alt="Pizza"
+               />
+               <h4 className="pizzaBlockTitle">{title}</h4>
             </Link>
-            <h4 className="pizzaBlockTitle">{title}</h4>
             <div className="pizzaBlockSelector">
                <ul>
                   {types.map(typeId => (
