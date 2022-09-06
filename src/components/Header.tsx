@@ -26,7 +26,7 @@ export const Header: FC<HeaderPropsType> = () => {
                </div>
             </Link>
 
-            <Search />
+            {location.pathname !== '/cart' && <Search />}
             <div className="headerCart">
                {location.pathname !== '/cart' &&
                    <Link to="/cart" className="button buttonCart">
