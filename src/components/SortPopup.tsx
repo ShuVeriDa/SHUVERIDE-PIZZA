@@ -1,8 +1,9 @@
-import {FC, useEffect, useRef, useState} from "react";
+import {FC, memo, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 
-import {AppDispatchType, useAppSelector} from "../redux/store";
-import {selectSort, setSort, SortPropertyEnum, SortType} from "../redux/slices/filterSlice";
+import {AppDispatchType} from "../redux/store";
+import {setSort, SortPropertyEnum, SortType} from "../redux/slices/filterSlice";
 
 
 type SortItemType = {
@@ -19,10 +20,16 @@ export const sortList: SortItemType[] = [
    {name: "алфавиту (ASC)", sortProperty: SortPropertyEnum.TITLE_ASC}
 ]
 
-type SortPropsType = {}
+type SortPopupPropsType = {
+   sort: SortType
+}
 
-export const SortPopup: FC<SortPropsType> = () => {
-   const {sort} = useAppSelector(selectSort)
+export const SortPopup: FC<SortPopupPropsType> = memo(({sort}) => {
+
+
+   useWhyDidYouUpdate('SortPopup',{sort} )
+
+
    const dispatch = useDispatch<AppDispatchType>()
    const sortRef = useRef<HTMLDivElement>(null)
 
@@ -77,4 +84,4 @@ export const SortPopup: FC<SortPropsType> = () => {
 
       </div>
    );
-};
+})

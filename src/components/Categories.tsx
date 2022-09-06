@@ -1,10 +1,12 @@
-import {FC} from "react";
+import {FC, memo} from "react";
+
 
 type CategoriesPropsType = {
    categoryID: number
    onClickCategory: (categoryID: number) => void
 }
-export const Categories: FC<CategoriesPropsType> = ({categoryID, onClickCategory}) => {
+export const Categories: FC<CategoriesPropsType> = memo(({categoryID, onClickCategory}) => {
+
    const categories: string[] = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
 
    return (
@@ -21,4 +23,4 @@ export const Categories: FC<CategoriesPropsType> = ({categoryID, onClickCategory
          </ul>
       </div>
    )
-}
+})

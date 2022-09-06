@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef} from "react";
+import React, {FC, useCallback, useEffect, useRef} from "react";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import qs from "qs";
@@ -77,9 +77,9 @@ export const Home: FC<HomePropsType> = () => {
    }, [categoryId, sort.sortProperty, currentPage])
 
 
-   const onClickCategory = (categoryId: number) => {
+   const onClickCategory = useCallback((categoryId: number) => {
       dispatch(setCategoryId(categoryId))
-   }
+   }, [])
 
    const onChangePage = (page: number) => {
       dispatch(setCurrentPage(page))
@@ -92,7 +92,7 @@ export const Home: FC<HomePropsType> = () => {
       <div className='container'>
          <div className="contentTop">
             <Categories categoryID={categoryId} onClickCategory={onClickCategory}/>
-            <SortPopup/>
+            <SortPopup sort={sort}/>
          </div>
          <h2 className="contentTitle">Все пиццы</h2>
          {status === "error"
