@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {FC, useEffect, useState} from "react";
 import axios from "axios";
 
@@ -33,6 +33,11 @@ export const FullPizza: FC<FullPizzaPropsType> = () => {
          <img src={pizza.imageUrl} alt=""/>
          <h2>{pizza.title}</h2>
          <h4>{pizza.price} ₽</h4>
+         <Link to='/notfound'>
+            <button className="button buttonOutline buttonAdd">
+               <span>Назад</span>
+            </button>
+         </Link>
       </div>
    );
 };

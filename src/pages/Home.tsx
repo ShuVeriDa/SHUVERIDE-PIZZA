@@ -37,36 +37,36 @@ export const Home: FC<HomePropsType> = () => {
       dispatch(fetchPizzasTC({currentPage, category, sortBy, order, search}))
    }
 
-// // Если изменили параметры и был первый рендер
-//    useEffect(() => {
-//       if (isMounted.current) {
-//          const queryString = qs.stringify({
-//             sortProperty: sort.sortProperty,
-//             categoryId,
-//             currentPage
-//          })
-//
-//          navigate(`?${queryString}`)
-//       }
-//       isMounted.current = true
-//    }, [categoryId, sort.sortProperty, currentPage])
-//
-//    //Если был первый рендер, то проверяем URL - параметры и сохраняем в редаксе
-//    useEffect(() => {
-//       if (window.location.search) {
-//          const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzasParamsType
-//          const sort = sortList.find((obj) => obj.sortProperty === params.sortBy)
-//
-//          dispatch(setFilters({
-//                searchValue: params.search,
-//                categoryId: Number(params.category),
-//                currentPage: params.currentPage,
-//                sort: sort || sortList[0],
-//             })
-//          )
-//          isSearch.current = true
-//       }
-//    }, [])
+// Если изменили параметры и был первый рендер
+   useEffect(() => {
+      if (isMounted.current) {
+         const queryString = qs.stringify({
+            sortProperty: sort.sortProperty,
+            categoryId,
+            currentPage
+         })
+
+         navigate(`?${queryString}`)
+      }
+      isMounted.current = true
+   }, [categoryId, sort.sortProperty, currentPage])
+
+   //Если был первый рендер, то проверяем URL - параметры и сохраняем в редаксе
+   useEffect(() => {
+      if (window.location.search) {
+         const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzasParamsType
+         const sort = sortList.find((obj) => obj.sortProperty === params.sortBy)
+
+         dispatch(setFilters({
+               searchValue: params.search,
+               categoryId: Number(params.category),
+               currentPage: params.currentPage,
+               sort: sort || sortList[0],
+            })
+         )
+         isSearch.current = true
+      }
+   }, [])
    // Если был первый рендер, то запрашиваем пиццы
    useEffect(() => {
       window.scrollTo(0, 0)
