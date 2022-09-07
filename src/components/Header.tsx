@@ -1,10 +1,10 @@
 import {FC, useEffect, useRef} from "react";
 import {Link, useLocation} from "react-router-dom";
 
-import {selectCart} from "../redux/slices/cartSlice";
 import logoSvg from '../assets/img/pizza-logo.svg'
 import {Search} from "./Search/Search";
 import {useAppSelector} from "../redux/store";
+import {selectCart} from "../redux/cart/cartSelectors";
 
 type HeaderPropsType = {}
 

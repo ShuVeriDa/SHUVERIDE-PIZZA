@@ -3,8 +3,10 @@ import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
 import {useAppSelector} from "../../redux/store";
-import {addItem, CartItemType, selectCartItemById} from "../../redux/slices/cartSlice";
-import {PizzaType} from "../../redux/slices/pizzaSlice";
+import {addItem} from "../../redux/cart/cartSlice";
+import {CartItemType} from "../../redux/cart/cartTypes";
+import {selectCartItemById} from "../../redux/cart/cartSelectors";
+import {PizzaType} from "../../redux/pizza/pizzaTypes";
 
 export type PizzaBlockPropsType = {}
 

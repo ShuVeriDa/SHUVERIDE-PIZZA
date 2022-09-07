@@ -1,8 +1,8 @@
 import {AnyAction, configureStore, ThunkDispatch} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
-import {filterReducer} from "./slices/filterSlice";
-import {cartReducer} from "./slices/cartSlice";
-import {pizzaReducer} from "./slices/pizzaSlice";
+import {filterReducer} from "./filter/filterSlice";
+import {cartReducer} from "./cart/cartSlice";
+import {pizzaReducer} from "./pizza/pizzaSlice";
 
 
 export const store = configureStore({

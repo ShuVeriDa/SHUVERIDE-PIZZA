@@ -2,7 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {FC, useEffect, useState} from "react";
 import axios from "axios";
 
-import {PizzaType} from "../redux/slices/pizzaSlice";
+import {PizzaType} from "../redux/pizza/pizzaTypes";
 
 type FullPizzaPropsType = {}
 

@@ -9,9 +9,11 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
 import {AppDispatchType, useAppSelector} from "../redux/store";
-import {selectSort, setCategoryId, setCurrentPage, setFilters} from "../redux/slices/filterSlice";
-import {fetchPizzasTC, selectPizzaData} from "../redux/slices/pizzaSlice";
+import {setCategoryId, setCurrentPage, setFilters} from "../redux/filter/filterSlice";
+import {fetchPizzasTC} from "../redux/pizza/pizzaSlice";
 import {SearchPizzasParamsType} from "../api/pizza-api";
+import {selectSort} from "../redux/filter/filterSelectors";
+import {selectPizzaData} from "../redux/pizza/PizzaSelectors";
 
 type HomePropsType = {}
 

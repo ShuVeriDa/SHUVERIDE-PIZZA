@@ -3,7 +3,8 @@ import {useDispatch} from "react-redux";
 import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 
 import {AppDispatchType} from "../redux/store";
-import {setSort, SortPropertyEnum, SortType} from "../redux/slices/filterSlice";
+import {setSort} from "../redux/filter/filterSlice";
+import {SortPropertyEnum, SortType} from "../redux/filter/filterTypes";
 
 
 type SortItemType = {

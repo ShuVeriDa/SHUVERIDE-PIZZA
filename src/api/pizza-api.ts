@@ -1,6 +1,6 @@
 import axios from "axios";
-import {PizzaType} from "../redux/slices/pizzaSlice";
-import {SortType} from "../redux/slices/filterSlice";
+import {SortType} from "../redux/filter/filterTypes";
+import {PizzaType} from "../redux/pizza/pizzaTypes";
 
 const instance = axios.create({
    baseURL: 'https://630a32f93249910032824d12.mockapi.io/'

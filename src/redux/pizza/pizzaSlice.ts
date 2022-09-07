@@ -1,12 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {SearchPizzasParamsType, pizzasAPI} from "../../api/pizza-api";
-import {RootState} from "../store";
-
-export enum Status {
-   LOADING = 'loading',
-   SUCCESS = 'success',
-   ERROR = 'error'
-}
+import {pizzasAPI, SearchPizzasParamsType} from "../../api/pizza-api";
+import {InitialStateType, PizzaType, Status} from "./pizzaTypes";
 
 const initialState: InitialStateType = {
    items: [],
@@ -40,26 +34,7 @@ export const pizzaSlice = createSlice({
 
 })
 
-export const selectPizzaData = (state: RootState) => state.pizza
-
 
 export const {} = pizzaSlice.actions
 export const pizzaReducer = pizzaSlice.reducer
 
-//types
-interface InitialStateType {
-   items: PizzaType[]
-   status: Status
-}
-
-//types
-export type PizzaType = {
-   id: string;
-   title: string;
-   price: number;
-   imageUrl: string;
-   sizes: number[];
-   types: number[];
-   rating: number;
-   count: number
-}

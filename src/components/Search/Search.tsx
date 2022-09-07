@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import {useDispatch} from "react-redux";
 
 import classes from './Search.module.scss'
-import {setSearchValue} from "../../redux/slices/filterSlice";
+import {setSearchValue} from "../../redux/filter/filterSlice";
 
 type SearchPropsType = {}
 
