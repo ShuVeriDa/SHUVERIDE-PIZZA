@@ -8,6 +8,7 @@ import {sortList, SortPopup} from "../components/SortPopup";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {Pagination} from "../components/Pagination/Pagination";
+
 import {AppDispatchType, useAppSelector} from "../redux/store";
 import {setCategoryId, setCurrentPage, setFilters} from "../redux/filter/filterSlice";
 import {fetchPizzasTC} from "../redux/pizza/pizzaSlice";
