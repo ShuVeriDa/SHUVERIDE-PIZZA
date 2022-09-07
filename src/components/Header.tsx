@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect, useRef} from "react";
 import {Link, useLocation} from "react-router-dom";
 
 import {selectCart} from "../redux/slices/cartSlice";
@@ -10,6 +10,15 @@ type HeaderPropsType = {}
 
 export const Header: FC<HeaderPropsType> = () => {
    const {totalPrice, items} = useAppSelector(selectCart)
+   const isMount = useRef(false)
+
+   useEffect(() => {
+      if (isMount.current) {
+         const json = JSON.stringify(items)
+         localStorage.setItem('cart', json)
+      }
+      isMount.current = true
+   }, [items])
 
    const location = useLocation()
 
