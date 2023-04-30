@@ -19,6 +19,7 @@ export const CartItemBlock: FC<CartItemPropsType & CartItemType> = (
    }
 
    const onClickMinus = () => {
+
       dispatch(minusItem(id))
    }
 

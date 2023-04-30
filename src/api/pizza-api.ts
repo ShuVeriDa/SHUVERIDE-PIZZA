@@ -3,8 +3,10 @@ import {SortType} from "../redux/filter/filterTypes";
 import {PizzaType} from "../redux/pizza/pizzaTypes";
 
 const instance = axios.create({
-   baseURL: 'https://630a32f93249910032824d12.mockapi.io/'
+   baseURL: process.env.REACT_APP_API_URL
+     || 'https://630a32f93249910032824d12.mockapi.io/'
 })
+
 
 
 //api

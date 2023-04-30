@@ -35,6 +35,6 @@ export const pizzaSlice = createSlice({
 })
 
 
-export const {} = pizzaSlice.actions
+// export const {} = pizzaSlice.actions
 export const pizzaReducer = pizzaSlice.reducer
 

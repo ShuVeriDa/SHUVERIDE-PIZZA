@@ -77,7 +77,7 @@ export const Home: FC<HomePropsType> = () => {
       }
 
       isSearch.current = false
-   }, [categoryId, sort.sortProperty, currentPage])
+   }, [categoryId, sort.sortProperty, currentPage, searchValue])
 
 
    const onClickCategory = useCallback((categoryId: number) => {

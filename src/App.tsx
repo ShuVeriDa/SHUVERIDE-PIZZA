@@ -5,18 +5,19 @@ import Loadable from "react-loadable";
 import './scss/app.scss';
 import {MainLayout} from "./layouts/MainLayout";
 import {Home} from "./pages/Home";
+import {Cart} from "./pages/Cart";
 
 
-const Cart = Loadable({
-   loader: () => import(/* webpackChunkName: "Cart"*/ "./pages/Cart"),
-   loading: () => <div> fdsfs</div>,
-   render(loaded: any) {
-      const Component: any = loaded.default; // tslint:disable-line:variable-name
-      return <Component/>;
-   },
-})
+// const Cart = Loadable({
+//    loader: () => import(/* webpackChunkName: "Cart"*/ "./pages/Cart"),
+//    loading: () => <div> Загрузка</div>,
+//    render(loaded: any) {
+//       const Component: any = loaded.default; // tslint:disable-line:variable-name
+//       return <Component/>;
+//    },
+// })
 
-const FullPizza = lazy(() => import(/* webpackChunkName: "FullPizza"*/ "./pages/FullPizza")
+const FullPizza = lazy(() => import(/* webpackChunkName: "FullPizza"*/ "./pages/FullPizza/FullPizza")
    .then(({FullPizza}) => ({default: FullPizza})),
 )
 const NotFound = lazy(() => import(/* webpackChunkName: "NotFound"*/ './pages/NotFound')

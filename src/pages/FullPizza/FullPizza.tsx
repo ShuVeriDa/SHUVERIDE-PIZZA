@@ -2,7 +2,8 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {FC, useEffect, useState} from "react";
 import axios from "axios";
 
-import {PizzaType} from "../redux/pizza/pizzaTypes";
+import {PizzaType} from "../../redux/pizza/pizzaTypes";
+import styles from './FullPizza.module.scss'
 
 type FullPizzaPropsType = {}
 
@@ -30,7 +31,7 @@ export const FullPizza: FC<FullPizzaPropsType> = () => {
    }
    return (
       <div className='container'>
-         <img src={pizza.imageUrl} alt=""/>
+         <img src={pizza.imageUrl} className={styles.image} alt=""/>
          <h2>{pizza.title}</h2>
          <h4>{pizza.price} ₽</h4>
          <Link to='/notfound'>
