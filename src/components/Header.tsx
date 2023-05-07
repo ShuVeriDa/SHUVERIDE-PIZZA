@@ -30,7 +30,7 @@ export const Header: FC<HeaderPropsType> = () => {
             <Link to={'/'} className="headerLogo">
                <img width="38" src={logoSvg} alt="Pizza logo"/>
                <div>
-                  <h1>React Pizza</h1>
+                  <h1>ShuVeriDe Pizza</h1>
                   <p>самая вкусная пицца в мире</p>
                </div>
             </Link>
